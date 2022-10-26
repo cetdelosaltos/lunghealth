@@ -131,65 +131,71 @@ class LHFT_single_card extends \Elementor\Widget_Base
     </h3>
     <div class="card mb-3">
         <div class="row g-0">
-            <?php if (has_post_thumbnail($post)): ?>
-            <div class="col-md-5 vh-60 pe-md-0">
-                <div class="rounded-start-1 lhft-single-card-thumbnail h-100 w-100" style="background-image: url(
-                    <?= get_the_post_thumbnail_url($post, 'full'); ?>);">
-                </div>
-            </div>
-            <div class="col-md-7 lhft-single-card-data">
-                <?php else: ?>
-                <div class="col-md-12 lhft-single-card-data">
+
+            <div class="col-md-12 lhft-single-card-data">
+
+                <div class="card-body roboto">
+                    <?php if ($post->post_content): ?>
+                    <div class="lhft_tool_single_field">
+                        <p><span class="gris fw-bold">Description:</span>
+                            <?= wp_filter_nohtml_kses($post->post_content); ?>
+                        </p>
+                    </div>
                     <?php
-        endif; ?>
-                    <div class="card-body roboto">
-                        <?php if ($post->post_content): ?>
-                        <div class="lhft_tool_single_field">
-                            <p><span class="gris fw-bold">Description:</span>
-                                <?= wp_filter_nohtml_kses($post->post_content); ?>
-                            </p>
-                        </div>
-                        <?php
         endif;
         if (get_field('ownerauthor', $post->ID)):
             $autorurl = get_search_link(get_field('ownerauthor', $post->ID));
-                        ?>
-                        <div class="lhft_tool_single_field">
-                            <p>
-                                <span class="gris fw-bold">Owner/Author: </span>
-                                <?php /*
-                                 <a href="<?= $autorurl; ?>">
-                                 <?= get_field('ownerauthor', $post->ID); ?>
-                                 </a>*/?>
-                            </p>
-                        </div>
-                        <?php
+                    ?>
+                    <div class="lhft_tool_single_field">
+                        <p>
+                            <span class="gris fw-bold">Owner/Author: </span>
+                            <?php /*
+                             <a href="<?= $autorurl; ?>">
+                             <?= get_field('ownerauthor', $post->ID); ?>
+                             </a>*/?>
+                        </p>
+                    </div>
+                    <?php
         endif;
         if (get_field('year', $post->ID)): ?>
-                        <div class="lhft_tool_single_field">
-                            <p>
-                                <span class="gris fw-bold">Year: </span>
-                                <?= get_field('year', $post->ID); ?>
-                            </p>
-                        </div>
-                        <?php
+                    <div class="lhft_tool_single_field">
+                        <p>
+                            <span class="gris fw-bold">Year: </span>
+                            <?= get_field('year', $post->ID); ?>
+                        </p>
+                    </div>
+                    <?php
         endif;
-        if (get_field('patien_population', $post->ID)): ?>
-                        <div class="lhft_tool_single_field">
+        if (get_field('patient_population', $post->ID)): ?>
+                    <div class="lhft_tool_single_field">
 
-                            <p>
-                                <span class="gris fw-bold">Patient Population: </span>
-                                <?= get_field('patient_population', $post->ID); ?>
-                            </p>
-                        </div>
-                        <?php
+                        <p>
+                            <span class="gris fw-bold">Patient Population: </span>
+
+                            <?php $pacientes = get_field('patient_population', $post->ID);
+            $cuantospacientes = count($pacientes);
+            $f = 1;
+            foreach ($pacientes as $formato):
+                $formatico = get_term($formato, 'lhft_format');
+                $linkformato = get_term_link($formatico);
+                $vinculoformato = '';
+                //$vinculoformato = '<a href="' . $linkformato . '">';
+                $vinculoformato .= $formato;
+                // $vinculoformato .= '</a>';
+                echo $vinculoformato;
+                $f++;
+                echo ($f <= $cuantospacientes) ? ', ' : '';
+            endforeach; ?>
+                        </p>
+                    </div>
+                    <?php
         endif;
         if (get_field('supporting_evidence', $post->ID)): ?>
-                        <div class="lhft_tool_single_field">
+                    <div class="lhft_tool_single_field">
 
-                            <p>
-                                <span class="gris fw-bold">Supporting Evidence: </span>
-                                <?php
+                        <p>
+                            <span class="gris fw-bold">Supporting Evidence: </span>
+                            <?php
             $soportes = get_field('supporting_evidence', $post->ID);
             $cuantossoportes = count($soportes);
             $so = 0;
@@ -202,16 +208,16 @@ class LHFT_single_card extends \Elementor\Widget_Base
                 echo ($so < $cuantossoportes) ? ', ' : '';
                 $so++;
             endforeach; ?>
-                            </p>
-                        </div>
-                        <?php
+                        </p>
+                    </div>
+                    <?php
         endif;
         if (get_field('format', $post->ID)): ?>
-                        <div class="lhft_tool_single_field">
+                    <div class="lhft_tool_single_field">
 
-                            <p>
-                                <span class="gris fw-bold">Format: </span>
-                                <?php $formatos = get_field('format', $post->ID);
+                        <p>
+                            <span class="gris fw-bold">Format: </span>
+                            <?php $formatos = get_field('format', $post->ID);
             $cuantosformatos = count($formatos);
             $f = 1;
             foreach ($formatos as $formato):
@@ -225,34 +231,34 @@ class LHFT_single_card extends \Elementor\Widget_Base
                 $f++;
                 echo ($f <= $cuantosformatos) ? ', ' : '';
             endforeach; ?>
-                            </p>
-                        </div>
-                        <?php
+                        </p>
+                    </div>
+                    <?php
         endif;
         if (get_field('access_instructions', $post->ID)): ?>
-                        <div class="lhft_tool_single_field">
-                            <p>
-                                <span class="gris fw-bold">Access Instructions:&nbsp;</span>
-                                <?= get_field('access_instructions', $post->ID, false); ?>
-                            </p>
-                        </div>
-                        <?php
+                    <div class="lhft_tool_single_field">
+                        <p>
+                            <span class="gris fw-bold">Access Instructions:&nbsp;</span>
+                            <?= get_field('access_instructions', $post->ID, false); ?>
+                        </p>
+                    </div>
+                    <?php
         endif;
         if (get_the_tag_list('', ', ', '', $post->ID)): ?>
-                        <div class="lhft_tool_single_field">
-                            <p>
-                                <span class="gris fw-bold">Tags: </span>
-                                <?php print_r(get_the_tag_list('', ', ', '', $post->ID)); ?>
-                            </p>
-                        </div>
-                        <?php
-        endif; ?>
+                    <div class="lhft_tool_single_field">
+                        <p>
+                            <span class="gris fw-bold">Tags: </span>
+                            <?php print_r(get_the_tag_list('', ', ', '', $post->ID)); ?>
+                        </p>
                     </div>
+                    <?php
+        endif; ?>
                 </div>
             </div>
         </div>
     </div>
-    <?php
+</div>
+<?php
 
     }
 
