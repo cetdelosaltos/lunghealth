@@ -111,31 +111,33 @@ class LHFT_single_card extends \Elementor\Widget_Base
     {
         global $post;
         $termino = get_the_terms($post->ID, 'lhf_tools_categories', 'string');
-        $term_ids = wp_list_pluck($termino, 'term_id');
-        $lalista = get_posts(array(
-            'post_type' => 'lhftools',
-            'tax_query' => array(
-                    array(
-                    'taxonomy' => 'lhf_tools_categories',
-                    'field' => 'id',
-                    'terms' => $term_ids,
-                    'operator' => 'IN' //Or 'AND' or 'NOT IN'
-                )
-            ),
-        ));
+
+
 ?>
 
 <div class="lhft-single-card">
-    <h3 class="roboto azul fw-bold">
-        <?= $post->post_title; ?>
-    </h3>
+
     <div class="card mb-3">
         <div class="row g-0">
 
             <div class="col-md-12 lhft-single-card-data">
 
                 <div class="card-body roboto">
-                    <?php if ($post->post_content): ?>
+                    <?php if ($termino):
+            $cuantosterminos = count($termino);
+            $ct = 0; ?>
+                    <div class="lhft_tool_single_field">
+                        <p><span class="gris fw-bold">Quality Statement<?=($cuantosterminos > 1) ? 's' : '' ?>:</span>
+                            <?php foreach ($termino as $terma):
+                $linkito = get_field('related_page', $terma);
+                echo '<a href="' . $linkito . '">' . $terma->name . '</a>';
+                $ct++;
+                echo ($ct < $cuantosterminos) ? ', ' : '';
+            endforeach; ?>
+                        </p>
+                    </div>
+                    <?php endif;
+        if ($post->post_content): ?>
                     <div class="lhft_tool_single_field">
                         <p><span class="gris fw-bold">Description:</span>
                             <?= wp_filter_nohtml_kses($post->post_content); ?>

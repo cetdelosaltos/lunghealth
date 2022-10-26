@@ -88,10 +88,10 @@ class LHFT_cats_menu extends \Elementor\Widget_Base
 
         $this->start_controls_section(
             'content_section',
-        [
-            'label' => esc_html__('Setup', 'lhft_cats_menu'),
-            'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-        ]
+            [
+                'label' => esc_html__('Setup', 'lhft_cats_menu'),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
         );
         $todascats = get_categories(array('taxonomy' => 'lhf_tools_categories', 'hide_empty' => false));
         $miscats = array();
@@ -100,22 +100,22 @@ class LHFT_cats_menu extends \Elementor\Widget_Base
         }
         $this->add_control(
             'lhft_category',
-        [
-            'label' => esc_html__('LHF Tool Category', 'lhft_cats_menu'),
-            'type' => \Elementor\Controls_Manager::SELECT,
-            'default' => 'desc',
-            'options' => $miscats
-        ]
+            [
+                'label' => esc_html__('LHF Tool Category', 'lhft_cats_menu'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'desc',
+                'options' => $miscats
+            ]
         );
         $this->add_control(
             'lhft_button_color',
-        [
-            'label' => esc_html__('Button Color', 'textdomain'),
-            'type' => \Elementor\Controls_Manager::COLOR,
-            'selectors' => [
-                '{{WRAPPER}} .lhft-btn-color' => 'background-color: {{VALUE}}',
-            ],
-        ]
+            [
+                'label' => esc_html__('Button Color', 'textdomain'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lhft-btn-color' => 'background-color: {{VALUE}}',
+                ],
+            ]
 
         );
 
@@ -137,6 +137,7 @@ class LHFT_cats_menu extends \Elementor\Widget_Base
         $term_ids = wp_list_pluck($termino, 'term_id');
         $lalista = get_posts(array(
             'post_type' => 'lhftools',
+            'numberposts' => -1,
             'tax_query' => array(
                     array(
                     'taxonomy' => 'lhf_tools_categories',
@@ -145,6 +146,7 @@ class LHFT_cats_menu extends \Elementor\Widget_Base
                     'operator' => 'IN' //Or 'AND' or 'NOT IN'
                 )
             ),
+            'order' => 'ASC'
         ));
 ?>
 
@@ -152,7 +154,7 @@ class LHFT_cats_menu extends \Elementor\Widget_Base
     <ul class="list-group list-group-flush">
         <?php foreach ($lalista as $postito): ?>
         <a href="<?= get_the_permalink($postito->ID); ?>"
-            class="list-group-item list-group-item-action <?=($postito->ID == $post->ID) ? 'active fw-bold' : ''?>">
+            class="list-group-item list-group-item-action <?=($postito->ID == $post->ID) ? 'active fw-bold' : '' ?>">
 
             <?= $postito->post_title; ?>
         </a>
