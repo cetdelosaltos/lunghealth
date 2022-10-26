@@ -1,0 +1,6 @@
+.lhftools-menu .raven-nav-menu .menu-item {
+  border-bottom-left-radius: 5px;
+}
+.lhftools-menu .raven-nav-menu .menu-item:first-child {
+  border-bottom-left-radius: 5px;
+}

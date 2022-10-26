@@ -1,0 +1,316 @@
+// out:../../assets/css/lhftoolkit.css, compress: true, sourceMap: true
+
+@azul: #00a2bd;
+@rojo: #ef3e42;
+@blanco: #ffffff;
+@gris: #ecedf1;
+
+.gris {
+    color: #838383;
+}
+
+.sombra {
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
+}
+
+.roboto {
+    font-family: "Roboto", Sans-serif;
+}
+
+.azul {
+    color: @azul;
+}
+
+.lhftools-menu {
+    .raven-nav-menu {
+        @media screen and (max-width: 1025px) {
+            background-color: #ef3e42;
+        }
+
+        .menu-item {
+            &:first-child {
+                .raven-menu-item {
+                    border-bottom-left-radius: 5px;
+                    padding-left: 20px;
+
+                    @media screen and (max-width: 1025px) {
+                        border-bottom-left-radius: 0px;
+                    }
+                }
+            }
+
+            &:last-child {
+                .raven-menu-item {
+                    border-bottom-right-radius: 5px;
+
+                    @media screen and (max-width: 1025px) {
+                        border-bottom-left-radius: 0px;
+                        border-bottom-right-radius: 0px;
+                    }
+
+                    background-color: @azul !important;
+                }
+
+                @media screen and (max-width: 1025px) {
+                    display: block !important;
+                }
+            }
+
+            @media (max-width:1025px) {
+                display: inline-block !important;
+            }
+        }
+    }
+}
+
+.lhf-top-header-menu {
+    .menu-item {
+        &.menu-item-has-children {
+            .has-submenu {
+                &:after {
+                    content: "\25BC";
+                    font-size: 0.75em;
+                    .roboto;
+                    font-weight: bold;
+                    color: #000000;
+                    margin-left: 10px;
+
+                }
+
+            }
+
+            .sub-menu {
+
+                .has-submenu {
+                    &:after {
+                        content: "\25BA" !important;
+                    }
+
+                    &:hover {
+                        &:after {
+                            color: #ffffff !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .donbtn {
+        .raven-link-item {
+            background-color: @rojo;
+            color: @blanco !important;
+            border-radius: 5px;
+
+            @media (max-width:1025px) {
+                border-radius: 0;
+            }
+
+            &:hover {
+                color: #ffffff !important;
+                background-color: #00a2bd;
+            }
+        }
+    }
+}
+
+.lhft-footer-menu {
+    .raven-nav-menu-main {
+        .raven-nav-menu {
+            justify-content: center;
+            text-align: center;
+
+            .menu-item {
+                display: inline-block !important;
+            }
+        }
+    }
+
+}
+
+.favorites-list {
+    margin: 0;
+    padding: 15px 0;
+
+    .lhft_favorite_tools_list_item {
+        border-top: none;
+        border-bottom: solid thin @gris;
+
+        h4 {
+            color: #ef3e42;
+        }
+
+        .favorite_list_item_button {
+            .lhft-blue-button;
+            padding: 10px 20px;
+        }
+    }
+
+    .no-favorites {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.elementor-widget-lhft_cats_grid {
+    height: 100%;
+
+    .elementor-widget-container {
+        height: 100%;
+    }
+}
+
+.lhft-home-widget {
+    height: 100%;
+
+    .lhft-home-grid {
+        height: 100%;
+        .sombra;
+        background-color: @blanco ;
+        border-radius: 5px;
+
+        .lhft-fondo-cat {
+            position: relative;
+
+            .lhft-cat-link {
+                .lhft-cat-image {
+                    position: relative;
+                    border-radius: 5px;
+                }
+
+                .lhft-cat-btn {
+                    .roboto;
+                    position: absolute;
+                    bottom: 15px;
+                    right: 15px;
+                    padding: 8px 15px;
+                    border-radius: 5px;
+                    max-width: 60%;
+                    box-shadow: ;
+                    color: white;
+                    .sombra;
+
+                }
+
+                &:hover {
+                    .lhft-cat-btn {
+                        filter: saturate(130%) brightness(75%);
+                        // background-color: #999999;
+                    }
+                }
+            }
+        }
+
+        .lhft-cat-description {
+            padding: 10px;
+            border-radius: 0 0 5px 5px;
+        }
+    }
+}
+
+.lhft-red-button {
+    background-color: @rojo !important;
+    color: @blanco !important;
+    border-radius: 5px;
+
+    &:hover {
+        color: #ffffff !important;
+        background-color: #00a2bd !important;
+    }
+}
+
+.lhft-blue-button {
+    background-color: @azul !important;
+    color: @blanco !important;
+    border-radius: 5px;
+
+    &:hover {
+        color: #ffffff !important;
+        background-color: @rojo !important;
+    }
+}
+
+.lhft-catlist-sidebar-widget {
+    .list-group {
+        border-top: 10px solid @rojo;
+
+        .list-group-item {
+            .roboto;
+
+            &.active {
+                background-color: #e6e6e6;
+                color: #838383,
+            }
+        }
+    }
+}
+
+.lhft-single-card {
+    .vh-60 {
+        height: 60vh;
+
+        @media (min-width:768px) {
+            height: auto;
+        }
+    }
+
+    .lhft-single-card-thumbnail {
+        border-right: solid 10px @azul;
+        background-position: top center;
+        background-size: cover;
+
+        img {}
+    }
+
+    .lhft-single-card-data {
+
+        .lhft_tool_single_field {
+            p {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.elementor-widget-lhft_favorites_bar {
+    height: 100%;
+
+    .elementor-widget-container {
+        height: 100%;
+
+        .lhft_favorites_bar {
+            background-color: @azul;
+            text-align: center;
+            .roboto;
+            color: @blanco;
+            padding: 5px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                color: @blanco;
+
+                &:hover {
+                    color: #e6e6e6;
+                }
+            }
+        }
+    }
+}
+
+.simplefavorite-button,
+.simplefavorites-clear {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    .roboto;
+    color: @blanco;
+    background-color: @azul;
+
+
+    &:hover {
+        background-color: #ef3e42;
+    }
+}
